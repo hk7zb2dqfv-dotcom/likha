@@ -23,11 +23,29 @@ export const defaults = {
 };
 
 export async function getSite() {
+
   const [site, home] = await Promise.all([
     result(supabase.from("likha_site_config").select("*").eq("id", true).maybeSingle()),
     result(supabase.from("likha_home_content").select("*").eq("id", true).maybeSingle())
   ]);
-  return { site: { ...defaults.site, ...(site || {}), theme: { ...defaults.site.theme, ...(site?.theme || {}) } }, home: { ...defaults.home, ...(home || {}) } };
+
+  const finalSite = {
+    ...defaults.site,
+    ...(site || {}),
+    theme: { ...defaults.site.theme, ...(site?.theme || {}) }
+  };
+
+  for (const key of ["logo_url", "cover_url", "background_image_url", "hero_art_url"]) {
+    if (typeof finalSite[key] === "string") {
+      finalSite[key] = finalSite[key].replace(/^assets\//, "");
+    }
+  }
+
+  return {
+    site: finalSite,
+    home: { ...defaults.home, ...(home || {}) }
+  };
+
 }
 
 export const listArtworks = (limit = 80) => result(
