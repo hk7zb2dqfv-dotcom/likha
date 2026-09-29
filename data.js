@@ -6,10 +6,10 @@ export const defaults = {
       primary: "#173a2d", secondary: "#d3a43c", background: "#f4f4ed", text: "#17251e",
       accent: "#bd4c34", button: "#173a2d", nav: "#10271f", headingFont: "Playfair Display", bodyFont: "DM Sans"
     },
-    logo_url: "assets/likha-logo.png",
-    cover_url: "assets/likha-official-cover.png",
+    logo_url: "likha-logo.png",
+    cover_url: "likha-official-cover.png",
     background_image_url: "",
-    hero_art_url: "assets/studio-study.jpg",
+    hero_art_url: "studio-study.jpg",
     school_email_domain: ""
   },
   home: {
